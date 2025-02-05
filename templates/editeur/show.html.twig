@@ -3,36 +3,51 @@
 {% block title %}Editeur{% endblock %}
 
 {% block main %}
-    <h1>Editeur</h1>
+    <div class="container mt-4">
+        <h1 class="mb-4">Détails de l'éditeur</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table table-bordered table-striped">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ editeur.id }}</td>
             </tr>
             <tr>
-                <th>Libelle</th>
-                <td>{{ editeur.libelle }}</td>
+                <th>Nom</th>
+                <td>{{ editeur.nom }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
                 <td>{{ editeur.adresse }}</td>
             </tr>
             <tr>
-                <th>Codepostal</th>
-                <td>{{ editeur.codepostal }}</td>
+                <th>Code postal</th>
+                <td>{{ editeur.cp }}</td>
             </tr>
             <tr>
                 <th>Ville</th>
                 <td>{{ editeur.ville }}</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ editeur.tel }}</td>
+            </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_editeur_index') }}">back to list</a>
+        <div class="mt-4">
+            <a href="{{ path('app_editeur_index') }}" class="btn btn-secondary mr-2">
+                <i class="bi bi-arrow-left-circle"></i> Retour à la liste
+            </a>
 
-    <a href="{{ path('app_editeur_edit', {'id': editeur.id}) }}">edit</a>
+            <a href="{{ path('app_editeur_edit', {'id': editeur.id}) }}" class="btn btn-warning mr-2">
+                <i class="bi bi-pencil-square"></i> Modifier
+            </a>
 
-    {{ include('editeur/_delete_form.html.twig') }}
+            <a href="{{ path('app_editeur_delete', {'id': editeur.id}) }}" class="btn btn-danger">
+                {{ include('editeur/_delete_form.html.twig') }}
+            </a href="{{ path('app_editeur_delete', {'id': editeur.id}) }}">
+        </div>
+    </div>
 {% endblock %}
+

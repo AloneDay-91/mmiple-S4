@@ -25,10 +25,8 @@ class ContactController extends AbstractController
         $sujet = $request->request->get('sujet');
         $message = $request->request->get('message');
 
-        $mailerService->sendTemplateEmail($expediteur, $sujet, $message);
+        $mailerService->sendEmail($expediteur, $sujet, $message);
 
         return $this->redirectToRoute('app_contact');
     }
-
-
 }

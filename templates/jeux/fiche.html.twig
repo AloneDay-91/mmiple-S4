@@ -5,23 +5,46 @@
         {{ parent() }}
         <style>
             .image-jeu {
-                width: 200px;
+                width: 100%;
+                max-width: 400px;
                 height: auto;
+            }
+
+            .liste-image li {
+                list-style-type: none;
+                margin-bottom: 10px;
             }
         </style>
     {%  endblock %}
 {% block main %}
-    <h1>{{ jeu.nom }}</h1>
-    <img src="{{ asset('images/jeux/') }}{{ jeu.photo1 }}" alt="{{ jeu.nom }}" class="image-jeu" />
-    <img src="{{ asset('images/jeux/') }}{{ jeu.photo2 }}" alt="{{ jeu.nom }}" class="image-jeu" />
-    <img src="{{ asset('images/jeux/') }}{{ jeu.photo3 }}" alt="{{ jeu.nom }}" class="image-jeu" />
-    <p>Prix Unitaire : {{ jeu.prix }} €</p>
+    <div class="card p-4 shadow-sm">
+        <h1 class="text-center">{{ jeu.nom }}</h1>
+        <p class="text-muted text-center">Par <strong>{{ jeu.editeur != null ? jeu.editeur.nom : 'non précisé' }}</strong></p>
+        <p class="text-muted text-center">Avis des utilisateurs : {{ jeu.avis|stars }}</p>
+        <p class="text-center"><span class="badge bg-secondary">{{ jeu.duree }} min de jeu</span></p>
+        <p class="text-center"><span class="badge bg-primary">{{ jeu.mini }} à {{ jeu.maxi }} joueurs</span></p>
+        <p class="text-center text-success fw-bold">Stock: {{ jeu.stock }}</p>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_accueil', {'id': jeu.id}) }}">Modifier</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="d-flex justify-content-center my-3 gap-2">
+                <a href="{{ path('app_jeu_modif', {'id': jeu.id}) }}" class="btn btn-warning">Modifier</a>
+                <form method="post" action="{{ path('app_jeu_supprime', {'id': jeu.id}) }}" onsubmit="return confirm('Êtes-vous sûr ?');">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        {% endif %}
 
-        <form method="post" action="{{ path('app_accueil', {'id': jeu.id}) }}" onsubmit="return confirm('Êtes-vous sûr ?');">
-            <button class="btn btn-danger">Supprimer</button>
-        </form>
-    {% endif %}
+        <div class="row g-3 justify-content-center">
+            {% for i in 1..3 %}
+                <div class="col-md-4 text-center">
+                    {% set photo = attribute(jeu, 'photo' ~ i) %}
+                    {% if photo %}
+                        <img src="{{ asset('images/jeux/' ~ photo) }}" alt="{{ jeu.nom }}" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                    {% else %}
+                        <p class="text-muted">Pas de Photo</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

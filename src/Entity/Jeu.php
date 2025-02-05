@@ -183,4 +183,9 @@ class Jeu
 
         return $this;
     }
+
+    public function getEmail()
+    {
+
+    }
 }

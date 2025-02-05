@@ -1,0 +1,37 @@
+{% block form %}
+    <div class="card p-4 shadow-sm">
+        <h1 class="text-center">Formulaire du Jeu</h1>
+        {{ form_start(form_jeu, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+        <div class="row g-3">
+            <div class="col-md-6">{{ form_row(form_jeu.nom, {'attr': {'class': 'form-control'}}) }}</div>
+            <div class="col-md-6">{{ form_row(form_jeu.prix, {'attr': {'class': 'form-control'}}) }}</div>
+            <div class="col-md-6">{{ form_row(form_jeu.editeur, {'attr': {'class': 'form-control'}}) }}</div>
+            <div class="col-md-6">{{ form_row(form_jeu.stock, {'attr': {'class': 'form-control'}}) }}</div>
+        </div>
+        <hr>
+        <div class="row g-3">
+            <div class="col-md-4">{{ form_row(form_jeu.mini, {'attr': {'class': 'form-control'}}) }}</div>
+            <div class="col-md-4">{{ form_row(form_jeu.maxi, {'attr': {'class': 'form-control'}}) }}</div>
+            <div class="col-md-4">{{ form_row(form_jeu.duree, {'attr': {'class': 'form-control'}}) }}</div>
+        </div>
+        <hr>
+        <div class="row g-3">
+            {% for i in 1..3 %}
+                <div class="col-md-4 text-center">
+                    {{ form_row(attribute(form_jeu, 'photo' ~ i), {'attr': {'class': 'form-control'}}) }}
+                    {% if attribute(jeu, 'photo' ~ i) %}
+                        <img src="{{ asset('images/jeux/' ~ attribute(jeu, 'photo' ~ i)) }}" alt="Image {{ i }}" class="img-thumbnail mt-2" style="max-width: 200px; max-height: 200px;">
+                    {% else %}
+                        <p class="text-muted">Pas de Photo</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="mb-3">{{ form_row(form_jeu.avis, {'attr': {'class': 'form-control'}}) }}</div>
+        <div class="text-center">
+            <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+        {{ form_end(form_jeu) }}
+    </div>
+{% endblock %}

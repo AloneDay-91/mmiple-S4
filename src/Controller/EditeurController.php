@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Essai;
+use App\Entity\Editeur;
 use App\Form\EditeurType;
 use App\Repository\EditeurRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +25,7 @@ final class EditeurController extends AbstractController
     #[Route('/new', name: 'app_editeur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $editeur = new Essai();
+        $editeur = new Editeur();
         $form = $this->createForm(EditeurType::class, $editeur);
         $form->handleRequest($request);
 
@@ -43,7 +43,7 @@ final class EditeurController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_editeur_show', methods: ['GET'])]
-    public function show(Essai $editeur): Response
+    public function show(Editeur $editeur): Response
     {
         return $this->render('editeur/show.html.twig', [
             'editeur' => $editeur,
@@ -51,7 +51,7 @@ final class EditeurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_editeur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Essai $editeur, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Editeur $editeur, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(EditeurType::class, $editeur);
         $form->handleRequest($request);
@@ -69,7 +69,7 @@ final class EditeurController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_editeur_delete', methods: ['POST'])]
-    public function delete(Request $request, Essai $editeur, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Editeur $editeur, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$editeur->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($editeur);

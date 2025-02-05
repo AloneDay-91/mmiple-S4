@@ -1,0 +1,8 @@
+Bonjour,
+Un nouveau jeu a été ajouté sur MMIPLE. Voici les détails :
+Nom : {{ jeu.nom }}
+Nb joueurs : de {{ jeu.mini }} à {{ jeu.maxi }}
+Durée : {{ jeu.duree|date('d/m/Y') }}
+Editeur : {{ jeu.editeur ? jeu.editeur.nom : '-' }}
+Prix : {{ jeu.prix }}
+Stock: {{ jeu.stock }}

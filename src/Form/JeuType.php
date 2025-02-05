@@ -6,6 +6,7 @@ use App\Entity\Editeur;
 use App\Entity\Jeu;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,8 +22,11 @@ class JeuType extends AbstractType
             ->add('photo1')
             ->add('photo2')
             ->add('photo3')
-            ->add('prix')
+            ->add('prix', TextType::class, [
+                'required' => false,
+            ])
             ->add('stock')
+            ->add('avis')
             ->add('editeur', EntityType::class, [
                 'class' => Editeur::class,
                 'choice_label' => 'nom',
