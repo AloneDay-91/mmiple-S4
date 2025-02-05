@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des Jeux {% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <style>
+            .image-vignette {
+                width: 150px;
+                height: 100px;
+            }
+        </style>
+    {%  endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Nom</th>
+            <th>Editeur</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>Avis</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for jeu in jeux %}
+            <tr>
+                <td><a href="{{ path('app_fiche', {'code': jeu.id }) }}">{{ jeu.id }}</a></td>
+                <td>{{ jeu.nom }}</td>
+                <td>{{ jeu.editeur != null ? jeu.editeur.nom : '-' }}</td>
+                <td>{{ jeu.prix|price('€', 2, ',', ' ') }}</td>
+                <td><img class="image-vignette" src="{{ asset('images/jeux/') }}{{ jeu.photo1 }}" alt="{{ jeu.nom }}" /></td>
+                <td>{{ jeu.avis|stars }}</td>
+                <td><button class="btn btn-primary ajoutJeu" data-id="{{ jeu.id }}" data-nom="{{ jeu.nom }}" data-prix="{{ jeu.prix }}">Ajouter au panier</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
