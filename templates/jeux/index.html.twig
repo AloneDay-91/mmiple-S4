@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Liste des Jeux {% endblock %}
+{% block title %} {{ 'Liste des Jeux'|trans }} {% endblock %}
 
     {% block stylesheets %}
         {{ parent() }}
@@ -14,20 +14,24 @@
 
 {% block main %}
     <div class="d-flex justify-content-between align-items-center mb-2">
-        <h1>Liste des Jeux</h1>
-        <a class="btn btn-primary" href="{{ path('app_jeu_new') }}">Ajouter un jeu</a>
+        <h1>
+            {{ 'Liste des Jeux'|trans }}
+        </h1>
+        <a class="btn btn-primary" href="{{ path('app_jeu_new') }}">
+            {{ 'Ajouter un jeu'|trans }}
+        </a>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover text-center align-middle">
             <thead class="table-dark">
             <tr>
-                <th>Code</th>
-                <th>Nom</th>
-                <th>Editeur</th>
-                <th>Prix</th>
-                <th>Image</th>
-                <th>Avis</th>
-                <th>Action</th>
+                <th>{{ 'Code'|trans }}</th>
+                <th>{{ 'Nom'|trans }}</th>
+                <th>{{ 'Editeur'|trans }}</th>
+                <th>{{ 'Prix'|trans }}</th>
+                <th>{{ 'Image'|trans }}</th>
+                <th>{{ 'Avis'|trans }}</th>
+                <th>{{ 'Action'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -36,10 +40,11 @@
                     <td><a class="text-decoration-none btn btn-primary" href="{{ path('app_fiche', {'code': jeu.id }) }}">{{ jeu.id }}</a></td>
                     <td>{{ jeu.nom }}</td>
                     <td>{{ jeu.editeur != null ? jeu.editeur.nom : '-' }}</td>
-                    <td class="fw-bold">{{ jeu.prix|price('€', 2, ',', ' ') }}</td>
+                    <!--<td class="fw-bold">{{ jeu.prix|price('€', 2, ',', ' ') }}</td>-->
+                    <td class="fw-bold">{{ jeu.prix|format_currency('EUR') }}</td>
                     <td><img class="img-thumbnail" style="width: 80px; height: auto;" src="{{ asset('images/jeux/') }}{{ jeu.photo1 }}" alt="{{ jeu.nom }}" /></td>
                     <td>{{ jeu.avis|stars }}</td>
-                    <td><button class="btn btn-primary ajoutJeu" data-id="{{ jeu.id }}" data-nom="{{ jeu.nom }}" data-prix="{{ jeu.prix }}">Ajouter au panier</button></td>
+                    <td><button class="btn btn-primary ajoutJeu" data-id="{{ jeu.id }}" data-nom="{{ jeu.nom }}" data-prix="{{ jeu.prix }}">{{ 'Ajouter au panier'|trans }}</button></td>
                 </tr>
             {% endfor %}
             </tbody>

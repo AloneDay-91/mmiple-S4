@@ -16,6 +16,17 @@ class EditeurRepository extends ServiceEntityRepository
         parent::__construct($registry, Editeur::class);
     }
 
+    public function findByCodePostal($codePostal): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.cp = :cp')
+            ->setParameter('cp', $codePostal)
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Editeur[] Returns an array of Editeur objects
     //     */

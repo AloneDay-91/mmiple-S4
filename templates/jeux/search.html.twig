@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+    <h1>Recherche de jeux</h1>
+    <form method="get">
+        <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="number" class="form-control" id="prix" name="prix">
+        </div>
+        <div class="form-group">
+            <label for="texte">Texte</label>
+            <input type="text" class="form-control" id="texte" name="texte">
+        </div>
+        <div class="form-group">
+            <label for="codePostal">Code postal</label>
+            <input type="text" class="form-control" id="codePostal" name="codePostal">
+        </div>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+{% endblock %}
+

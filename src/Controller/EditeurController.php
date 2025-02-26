@@ -17,8 +17,11 @@ final class EditeurController extends AbstractController
     #[Route(name: 'app_editeur_index', methods: ['GET'])]
     public function index(EditeurRepository $editeurRepository): Response
     {
+
+        $editeurByCp = $editeurRepository->findByCodePostal('33000');
+
         return $this->render('editeur/index.html.twig', [
-            'editeurs' => $editeurRepository->findAll(),
+            'editeurs' => $editeurByCp
         ]);
     }
 

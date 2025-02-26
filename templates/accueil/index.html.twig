@@ -3,6 +3,8 @@
 {% block title %}Hello AccueilController!{% endblock %}
 
 {% block main %}
-    <h1>Bienvenue</h1>
-    <p>La date du jour : {{ 'now'|dateFr }}</p>
+    <h1>{{ 'Bienvenue' | trans }}</h1>
+    <!--<p>{{ 'La date du jour :' | trans }}{{ 'now'|dateFr }}</p>-->
+    <p>{{ 'La date du jour :' | trans }}{{ 'now'|format_date('long') }}</p>
+    <p>Le site est en : {{ app.locale }}</p>
 {% endblock %}
