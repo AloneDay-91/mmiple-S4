@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\JeuRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: JeuRepository::class)]
 class Jeu
@@ -39,6 +40,7 @@ class Jeu
     private ?string $prix = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Length(min: 0, max: 10, minMessage: 'Le stock doit être supérieur à 0', maxMessage: 'Le stock doit être inférieur à 100')]
     private ?int $stock = null;
 
     #[ORM\ManyToOne(inversedBy: 'jeux')]

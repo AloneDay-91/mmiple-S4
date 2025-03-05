@@ -27,7 +27,9 @@ class JeuController extends AbstractController
         $jeu = new Jeu();
 
         // Créer le formulaire
-        $form = $this->createForm(JeuType::class, $jeu);
+        $form = $this->createForm(JeuType::class, $jeu, [
+            'codePostal' => '54700'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
